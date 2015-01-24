@@ -2,7 +2,8 @@ package co.s4n.interview.domain.shared;
 
 import java.util.Optional;
 
-import co.s4n.interview.domain.abst.Coordinate;
+import co.s4n.interview.domain.shared.abs.Change;
+import co.s4n.interview.domain.shared.abs.Coordinate;
 
 /**
  * 

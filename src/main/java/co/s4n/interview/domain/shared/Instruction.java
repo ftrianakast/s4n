@@ -7,27 +7,27 @@ package co.s4n.interview.domain.shared;
  */
 public class Instruction {
 
-	private enum InstructionType {
+	public enum Action {
 		A, I, D
 	}
 
-	private InstructionType instruction;
+	private Action action;
 
 	/**
 	 * Constructor Type
-	 * @param instruction
+	 * @param action
 	 */
-	public Instruction(InstructionType instruction) {
+	public Instruction(Action action) {
 		super();
-		this.instruction = instruction;
+		this.action = action;
 	}
 
-	public InstructionType getInstruction() {
-		return instruction;
+	public Action getAction() {
+		return action;
 	}
 
-	public void setInstruction(InstructionType instruction) {
-		this.instruction = instruction;
+	public void setInstruction(Action instruction) {
+		this.action = instruction;
 	}
 
 }

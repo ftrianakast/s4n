@@ -1,4 +1,4 @@
-package co.s4n.interview.domain.abst;
+package co.s4n.interview.domain.shared.abs;
 
 /**
  * Represents a 2D Position
@@ -22,6 +22,14 @@ public class Coordinate {
 		super();
 		this.x = x;
 		this.y = y;
+	}
+
+	@Override
+	public boolean equals(Object reqObj) {
+		Coordinate reqCoordinate = (Coordinate) reqObj;
+		boolean response = (this.getX() == reqCoordinate.getX())
+				&& (this.getY() == reqCoordinate.getY());
+		return response;
 	}
 
 	public int getX() {

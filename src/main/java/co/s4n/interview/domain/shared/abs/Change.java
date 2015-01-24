@@ -1,4 +1,4 @@
-package co.s4n.interview.domain.shared;
+package co.s4n.interview.domain.shared.abs;
 
 import java.util.Optional;
 

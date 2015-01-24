@@ -1,4 +1,4 @@
-package co.s4n.interview.domain.abst;
+package co.s4n.interview.domain.shared.abs;
 
 /**
  * 
