@@ -9,7 +9,6 @@ import co.s4n.interview.domain.shared.Instruction.Action;
 import co.s4n.interview.domain.shared.Threat;
 import co.s4n.interview.domain.shared.abs.Position;
 import co.s4n.interview.domain.world.World;
-import co.s4n.interview.utils.patterns.Observer;
 
 /**
  * The robot could be observale by some sensors
@@ -198,7 +197,7 @@ public class Robot implements SensorObservable {
 		private List<Sensor> sensors;
 
 		@SuppressWarnings("unused")
-		private List<Observer> mvmSensorsObservers;
+		private List<Sensor> mvmSensorsObservers;
 
 		private Position currentPosition;
 
@@ -240,7 +239,7 @@ public class Robot implements SensorObservable {
 			return this;
 		}
 
-		public Builder withSensorObservers(List<Observer> sensors) {
+		public Builder withSensorObservers(List<Sensor> sensors) {
 			this.mvmSensorsObservers = sensors;
 			return this;
 		}

@@ -8,6 +8,7 @@ import co.s4n.interview.domain.shared.abs.GeographicDirection;
 import co.s4n.interview.domain.shared.abs.Position;
 
 /**
+ * A hip allows to the robot turn on a specific direction
  * 
  * @author Felipe Triana <ftrianakast@gmail.com>
  * @version 1.0
@@ -41,9 +42,9 @@ public class Hip {
 			predictedPosition = Optional.of(turnRight());
 		}
 		this.owner.setCurrentPosition(predictedPosition.get());
-//		System.out.print("My new position is "
-//				+ this.owner.getCurrentPosition().toString());
-//		System.out.println();
+		// System.out.print("My new position is "
+		// + this.owner.getCurrentPosition().toString());
+		// System.out.println();
 	}
 
 	/**

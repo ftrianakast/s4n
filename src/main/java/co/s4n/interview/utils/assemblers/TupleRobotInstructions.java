@@ -6,7 +6,7 @@ import co.s4n.interview.domain.robot.Robot;
 import co.s4n.interview.domain.shared.Instruction;
 
 /**
- * It helps to build a pair robot instructions
+ * Mock object that helps to build a pair robot instructions
  * 
  * @author Felipe Triana <ftrianakast@gmail.com>
  *

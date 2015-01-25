@@ -1,6 +1,9 @@
 package co.s4n.interview.domain.shared;
 
 /**
+ * Represents the outside instructions given to a robot:
+ * 
+ * A:'Adelante' I:'Izquierda', D:'Derecha'
  * 
  * @author Felipe Triana<ftrianakast@gmail.com>
  *

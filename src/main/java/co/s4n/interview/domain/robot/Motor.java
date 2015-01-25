@@ -4,8 +4,17 @@ import co.s4n.interview.domain.shared.abs.Coordinate;
 import co.s4n.interview.domain.shared.abs.GeographicDirection;
 import co.s4n.interview.domain.shared.abs.Position;
 
+/**
+ * It allows to a robot go forward
+ * 
+ * @author ftrianakast
+ *
+ */
 public class Motor {
 
+	/**
+	 * Robot owner
+	 */
 	private Robot owner;
 
 	/**

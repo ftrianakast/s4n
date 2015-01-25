@@ -7,7 +7,8 @@ import co.s4n.interview.domain.shared.Instruction;
 import co.s4n.interview.domain.shared.Instruction.Action;
 
 /**
- * It assembles an instruction
+ * It assembles an instruction given to a robot
+ * 
  * @author ftrianakast
  *
  */
@@ -19,7 +20,8 @@ public class InstructionAssembler {
 	 * @return
 	 */
 	public static List<Instruction> assembleInstructions(String line) {
-		return line.trim().chars().mapToObj(character -> getInstruction(character))
+		return line.trim().chars()
+				.mapToObj(character -> getInstruction(character))
 				.collect(Collectors.toList());
 	}
 

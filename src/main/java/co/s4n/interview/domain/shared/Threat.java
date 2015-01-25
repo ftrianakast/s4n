@@ -6,7 +6,6 @@ import co.s4n.interview.domain.shared.abs.Change;
 import co.s4n.interview.domain.shared.abs.Coordinate;
 
 /**
- * 
  * @author Felipe Triana <ftrinakast@gmail.com>
  * @version 1.0
  */
@@ -14,6 +13,7 @@ public class Threat extends Change {
 
 	/**
 	 * It is the threat type
+	 * 
 	 * @author Felipe Triana
 	 *
 	 */
@@ -29,7 +29,7 @@ public class Threat extends Change {
 			}
 		}
 	}
-	
+
 	/**
 	 * Threat position
 	 */
@@ -39,7 +39,7 @@ public class Threat extends Change {
 	 * Threat type
 	 */
 	private ThreatType threatType;
-	
+
 	/**
 	 * Default Constructor
 	 * 
@@ -69,9 +69,9 @@ public class Threat extends Change {
 	public void setThreatType(ThreatType threatType) {
 		this.threatType = threatType;
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		String result = "(";
 		result = result + this.getPosition().getX() + ",";
 		result = result + this.getPosition().getY() + ")";

@@ -14,7 +14,7 @@ import co.s4n.interview.utils.assemblers.TupleRobotInstructions;
 import co.s4n.interview.utils.assemblers.WorldAssembler;
 
 /**
- * 
+ * Main of the project
  * @author Felipe Triana<ftrianakast@gmail.com>
  * @version 1.0
  */
