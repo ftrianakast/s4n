@@ -1,4 +1,4 @@
-package co.s4n.interview;
+package co.s4n.interview.utils.assemblers;
 
 import java.util.List;
 import java.util.stream.Collectors;

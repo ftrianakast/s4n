@@ -8,6 +8,10 @@ import co.s4n.interview.domain.robot.Robot;
 import co.s4n.interview.domain.shared.Instruction;
 import co.s4n.interview.domain.shared.Threat;
 import co.s4n.interview.domain.shared.abs.Position;
+import co.s4n.interview.utils.assemblers.Container;
+import co.s4n.interview.utils.assemblers.ThreatAssembler;
+import co.s4n.interview.utils.assemblers.TupleRobotInstructions;
+import co.s4n.interview.utils.assemblers.WorldAssembler;
 
 /**
  * 
