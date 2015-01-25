@@ -1,5 +1,11 @@
 package co.s4n.interview.domain.shared.abs;
 
+/**
+ * Models a Geographic position
+ * 
+ * @author Felipe Triana<ftrianakast@gmail.com>
+ *
+ */
 public class Position {
 
 	private Coordinate coordinate;
@@ -17,8 +23,27 @@ public class Position {
 		this.orientation = orientation;
 	}
 
-	public Position() {
-		// TODO Auto-generated constructor stub
+	public Coordinate getCoordinate() {
+		return coordinate;
+	}
+
+	public void setCoordinate(Coordinate coordinate) {
+		this.coordinate = coordinate;
+	}
+
+	public GeographicDirection getOrientation() {
+		return orientation;
+	}
+
+	public void setOrientation(GeographicDirection orientation) {
+		this.orientation = orientation;
+	}
+
+	@Override
+	public String toString() {
+		String buildedString = this.getCoordinate().getX() + " "
+				+ this.getCoordinate().getY() + " " + this.getOrientation();
+		return buildedString;
 	}
 
 	@Override
@@ -38,19 +63,4 @@ public class Position {
 		return response;
 	}
 
-	public Coordinate getCoordinate() {
-		return coordinate;
-	}
-
-	public void setCoordinate(Coordinate coordinate) {
-		this.coordinate = coordinate;
-	}
-
-	public GeographicDirection getOrientation() {
-		return orientation;
-	}
-
-	public void setOrientation(GeographicDirection orientation) {
-		this.orientation = orientation;
-	}
 }

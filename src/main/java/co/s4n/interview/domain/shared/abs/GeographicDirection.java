@@ -8,22 +8,22 @@ package co.s4n.interview.domain.shared.abs;
 public enum GeographicDirection {
 	N {
 		public String toString() {
-			return "North";
+			return "N";
 		}
 	},
 	E {
 		public String toString() {
-			return "East";
+			return "E";
 		}
 	},
 	O {
 		public String toString() {
-			return "West";
+			return "W";
 		}
 	},
 	S {
 		public String toString() {
-			return "South";
+			return "S";
 		}
 	}
 }

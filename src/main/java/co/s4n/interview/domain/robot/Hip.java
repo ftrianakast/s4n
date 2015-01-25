@@ -1,5 +1,7 @@
 package co.s4n.interview.domain.robot;
 
+import java.util.Optional;
+
 import co.s4n.interview.domain.shared.Instruction.Action;
 import co.s4n.interview.domain.shared.abs.Coordinate;
 import co.s4n.interview.domain.shared.abs.GeographicDirection;
@@ -15,18 +17,33 @@ public class Hip {
 	private Robot owner;
 
 	/**
+	 * Default constructor
+	 * 
+	 * @param owner
+	 */
+	public Hip(Robot owner) {
+		super();
+		this.owner = owner;
+	}
+
+	/**
 	 * @param owner
 	 * @param turnAction
 	 * @return
 	 */
 	public void turnDependOnAction(Action turnAction) {
-		Position predictedPosition = new Position();
+		Optional<Position> predictedPosition = Optional.empty();
 		if (turnAction.equals(Action.I)) {
-			predictedPosition = turnLeft();
+			// System.out.print("Girando a la izquierda...; ");
+			predictedPosition = Optional.of(turnLeft());
 		} else if (turnAction.equals(Action.D)) {
-			predictedPosition = turnRight();
+			// System.out.print("Girando a la derecha...; ");
+			predictedPosition = Optional.of(turnRight());
 		}
-		this.getOwner().setCurrentPosition(predictedPosition);
+		this.owner.setCurrentPosition(predictedPosition.get());
+//		System.out.print("My new position is "
+//				+ this.owner.getCurrentPosition().toString());
+//		System.out.println();
 	}
 
 	/**
@@ -35,11 +52,10 @@ public class Hip {
 	 * @return
 	 */
 	private Position turnRight() {
-		GeographicDirection currentGeoDirection = owner.getCurrentPosition()
-				.getOrientation();
-		Coordinate currentCoordinate = owner.getCurrentPosition()
+		GeographicDirection currentGeoDirection = this.owner
+				.getCurrentPosition().getOrientation();
+		Coordinate currentCoordinate = this.owner.getCurrentPosition()
 				.getCoordinate();
-		Position predictedPosition = new Position();
 		GeographicDirection predictedGeo = currentGeoDirection;
 
 		if (currentGeoDirection.equals(GeographicDirection.E)) {
@@ -51,9 +67,7 @@ public class Hip {
 		} else if (currentGeoDirection.equals(GeographicDirection.S)) {
 			predictedGeo = GeographicDirection.O;
 		}
-		predictedPosition.setOrientation(predictedGeo);
-		predictedPosition.setCoordinate(currentCoordinate);
-		return predictedPosition;
+		return new Position(currentCoordinate, predictedGeo);
 	}
 
 	/**
@@ -66,7 +80,6 @@ public class Hip {
 				.getOrientation();
 		Coordinate currentCoordinate = owner.getCurrentPosition()
 				.getCoordinate();
-		Position predictedPosition = new Position();
 		GeographicDirection predictedGeo = currentGeoDirection;
 
 		if (currentGeoDirection.equals(GeographicDirection.E)) {
@@ -78,17 +91,6 @@ public class Hip {
 		} else if (currentGeoDirection.equals(GeographicDirection.S)) {
 			predictedGeo = GeographicDirection.E;
 		}
-		predictedPosition.setOrientation(predictedGeo);
-		predictedPosition.setCoordinate(currentCoordinate);
-		return predictedPosition;
+		return new Position(currentCoordinate, predictedGeo);
 	}
-
-	public Robot getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Robot owner) {
-		this.owner = owner;
-	}
-
 }

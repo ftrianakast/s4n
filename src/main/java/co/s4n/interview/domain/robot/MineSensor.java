@@ -1,22 +1,18 @@
 package co.s4n.interview.domain.robot;
 
-import java.util.List;
 import java.util.Optional;
 
 import co.s4n.interview.domain.shared.Threat;
-import co.s4n.interview.domain.shared.abs.Position;
-import co.s4n.interview.utils.patterns.Observer;
+import co.s4n.interview.domain.shared.abs.Coordinate;
 
 /**
  * 
  * @author Felipe Triana<ftrianakast@gmail.com>
  * @version 1.0
  */
-public class MineSensor implements Observer {
+public class MineSensor implements Sensor {
 
 	private Robot owner;
-
-	private List<Threat> findedThreats;
 
 	/**
 	 * Default constructo
@@ -32,18 +28,20 @@ public class MineSensor implements Observer {
 	public void update() {
 		Optional<Threat> searchedMine = searchMine();
 		if (searchedMine.isPresent()) {
-			findedThreats.add(searchMine().get());
+			owner.getFindedThreats().add(searchedMine.get());
 		}
 	}
 
 	/**
 	 * Search for a mine
+	 * 
 	 * @return
 	 */
 	public Optional<Threat> searchMine() {
-		Position currentPosition = owner.getCurrentPosition();
+		Coordinate currentPosition = owner.getCurrentPosition().getCoordinate();
 		return owner.getCurrentWorld().getThreats().stream()
 				.filter(threat -> threat.getPosition().equals(currentPosition))
 				.findFirst();
 	}
+	
 }

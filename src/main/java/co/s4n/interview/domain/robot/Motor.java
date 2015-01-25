@@ -24,13 +24,13 @@ public class Motor {
 	 * @return
 	 */
 	public void walk() {
-		Position predictedPosition = new Position();
 		Coordinate predictedCoordinate = new Coordinate(0, 0);
 		GeographicDirection currentGeoDirection = owner.getCurrentPosition()
 				.getOrientation();
 		Coordinate currentCoordinate = owner.getCurrentPosition()
 				.getCoordinate();
 
+		// System.out.print("Walk...;");
 		if (currentGeoDirection.equals(GeographicDirection.E)) {
 			predictedCoordinate.setX(currentCoordinate.getX() + 1);
 			predictedCoordinate.setY(currentCoordinate.getY());
@@ -45,9 +45,11 @@ public class Motor {
 			predictedCoordinate.setY(currentCoordinate.getY() - 1);
 		}
 
-		predictedPosition.setOrientation(currentGeoDirection);
-		predictedPosition.setCoordinate(predictedCoordinate);
-		owner.setCurrentPosition(predictedPosition);
+		Position newPosition = new Position(predictedCoordinate,
+				currentGeoDirection);
+		owner.setCurrentPosition(newPosition);
+		// System.out.println(" My new position is: "
+		// + this.owner.getCurrentPosition().toString());
 	}
 
 }

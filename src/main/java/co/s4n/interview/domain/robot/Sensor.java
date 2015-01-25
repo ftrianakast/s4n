@@ -1,9 +1,5 @@
 package co.s4n.interview.domain.robot;
 
-import java.util.Optional;
-
-import co.s4n.interview.domain.shared.abs.Change;
-
 /**
  * 
  * @author Felipe Triana<ftrianakast@gmail.com>
@@ -12,10 +8,8 @@ import co.s4n.interview.domain.shared.abs.Change;
 public interface Sensor {
 
 	/**
-	 * Detect changes.
-	 * 
-	 * @return T change if something is detected.
+	 * Sensor is an observer so it must observe changes of any types
 	 */
-	public Optional<Change> isSomeChanged();
+	void update();
 
 }

@@ -13,8 +13,6 @@ import co.s4n.interview.domain.shared.Threat;
  */
 public class World {
 
-	private String id;
-
 	private Optional<String> name;
 
 	private List<Robot> robots;
@@ -23,7 +21,7 @@ public class World {
 
 	private int height;
 
-	private int weight;
+	private int width;
 
 	/**
 	 * Default constructor
@@ -35,15 +33,20 @@ public class World {
 	 * @param height
 	 * @param weight
 	 */
-	public World(String id, Optional<String> name, List<Robot> robots,
+	public World(Optional<String> name, List<Robot> robots,
 			List<Threat> threats, int height, int weight) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.robots = robots;
 		this.threats = threats;
 		this.height = height;
-		this.weight = weight;
+		this.width = weight;
+	}
+
+	/**
+	 * Constructor
+	 */
+	public World() {
 	}
 
 	/**
@@ -77,12 +80,12 @@ public class World {
 		this.height = height;
 	}
 
-	public int getWeight() {
-		return weight;
+	public int getWidth() {
+		return width;
 	}
 
-	public void setWeight(int weight) {
-		this.weight = weight;
+	public void setWidth(int width) {
+		this.width = width;
 	}
 
 	public List<Robot> getRobots() {
@@ -93,13 +96,6 @@ public class World {
 		this.robots = robots;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public List<Threat> getThreats() {
 		return threats;

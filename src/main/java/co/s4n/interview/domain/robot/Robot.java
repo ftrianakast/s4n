@@ -6,17 +6,18 @@ import java.util.Optional;
 
 import co.s4n.interview.domain.shared.Instruction;
 import co.s4n.interview.domain.shared.Instruction.Action;
+import co.s4n.interview.domain.shared.Threat;
 import co.s4n.interview.domain.shared.abs.Position;
 import co.s4n.interview.domain.world.World;
-import co.s4n.interview.utils.patterns.Observable;
 import co.s4n.interview.utils.patterns.Observer;
 
 /**
+ * The robot could be observale by some sensors
  * 
  * @author Felipe Triana<ftriankast@gmail.com>
  * @version 1.0
  */
-public class Robot implements Observable {
+public class Robot implements SensorObservable {
 
 	private String id;
 
@@ -26,7 +27,9 @@ public class Robot implements Observable {
 
 	private List<Sensor> sensors;
 
-	private List<Observer> mvmSensorsObservers;
+	private List<Sensor> mvmSensorsObservers;
+
+	private List<Threat> findedThreats;
 
 	private Position currentPosition;
 
@@ -34,7 +37,6 @@ public class Robot implements Observable {
 
 	private Motor motor;
 
-	
 	private World currentWorld;
 
 	/**
@@ -46,19 +48,19 @@ public class Robot implements Observable {
 	 * @param sensors
 	 * @param currentpostion
 	 */
-	public Robot(String id, Optional<String> name,
-			Optional<String> description, List<Sensor> sensors,
-			Position currentpostion, Hip hip, Motor motor, World currentWorld) {
+	public Robot(Builder builder) {
 		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.sensors = sensors;
-		this.currentPosition = currentpostion;
-		this.hip = hip;
-		this.motor = motor;
-		this.mvmSensorsObservers = new ArrayList<Observer>();
-		this.currentWorld = currentWorld;
+		this.id = builder.id;
+		this.name = builder.name;
+		this.description = builder.description;
+		this.sensors = builder.sensors;
+		this.currentPosition = builder.currentPosition;
+		this.hip = builder.hip;
+		this.motor = builder.motor;
+		this.mvmSensorsObservers = new ArrayList<Sensor>();
+		this.currentWorld = builder.currentWorld;
+		this.findedThreats = new ArrayList<Threat>();
+
 	}
 
 	/**
@@ -68,22 +70,22 @@ public class Robot implements Observable {
 	 */
 	public void move(Instruction instruction) {
 		Action action = instruction.getAction();
+		// System.out.println("Instruction: " + action
+		// + ", Current Position: "
+		// + this.getCurrentPosition().toString());
 		if (action.equals(Action.I) || action.equals(Action.D)) {
 			hip.turnDependOnAction(action);
 		} else if (action.equals(Action.A)) {
+			if (!isAnExaminedPosition()) {
+				notificarSensores();
+			}
 			motor.walk();
-			notificarSensores();
 		}
 	}
 
 	@Override
-	public void addObserver(Observer observer) {
+	public void addObserver(Sensor observer) {
 		mvmSensorsObservers.add(observer);
-	}
-
-	@Override
-	public void removeObserver(Observer observer) {
-		mvmSensorsObservers.remove(observer);
 	}
 
 	/**
@@ -91,6 +93,21 @@ public class Robot implements Observable {
 	 */
 	private void notificarSensores() {
 		mvmSensorsObservers.forEach(sensorObserver -> sensorObserver.update());
+	}
+
+	/**
+	 * Return is a position is an examined position
+	 * 
+	 * @param position
+	 * @return
+	 */
+	private boolean isAnExaminedPosition() {
+		return this
+				.getFindedThreats()
+				.stream()
+				.anyMatch(
+						threat -> threat.getPosition().equals(
+								this.getCurrentPosition().getCoordinate()));
 	}
 
 	public Optional<String> getName() {
@@ -148,4 +165,108 @@ public class Robot implements Observable {
 	public void setCurrentWorld(World currentWorld) {
 		this.currentWorld = currentWorld;
 	}
+
+	public Motor getMotor() {
+		return motor;
+	}
+
+	public void setMotor(Motor motor) {
+		this.motor = motor;
+	}
+
+	public List<Threat> getFindedThreats() {
+		return findedThreats;
+	}
+
+	public void setFindedThreats(List<Threat> findedThreats) {
+		this.findedThreats = findedThreats;
+	}
+
+	/**
+	 * This inner class allows build different representations of robot
+	 * 
+	 * @author Felipe Triana
+	 *
+	 */
+	public static class Builder {
+		private String id;
+
+		private Optional<String> name;
+
+		private Optional<String> description;
+
+		private List<Sensor> sensors;
+
+		@SuppressWarnings("unused")
+		private List<Observer> mvmSensorsObservers;
+
+		private Position currentPosition;
+
+		private Hip hip;
+
+		private Motor motor;
+
+		private World currentWorld;
+
+		/**
+		 * Creates a minimal robot builder
+		 * 
+		 * @param id
+		 * @param currentPosition
+		 * @param currentWorld
+		 */
+		public Builder(String id, Position currentPosition) {
+			this.id = id;
+			this.currentPosition = currentPosition;
+		}
+
+		/**
+		 * 
+		 * @param name
+		 * @return
+		 */
+		public Builder withName(String name) {
+			this.name = Optional.of(name);
+			return this;
+		}
+
+		public Builder withDescription(String description) {
+			this.name = Optional.of(description);
+			return this;
+		}
+
+		public Builder withSensors(List<Sensor> sensors) {
+			this.sensors = sensors;
+			return this;
+		}
+
+		public Builder withSensorObservers(List<Observer> sensors) {
+			this.mvmSensorsObservers = sensors;
+			return this;
+		}
+
+		public Builder withHip(Hip hip) {
+			this.hip = hip;
+			return this;
+		}
+
+		public Builder withMotor(Motor motor) {
+			this.motor = motor;
+			return this;
+		}
+
+		/**
+		 * Construct a robot
+		 */
+		public Robot build() {
+			return new Robot(this);
+		}
+	}
+
+	@Override
+	public void removeObserver(Sensor observer) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
